@@ -1,5 +1,6 @@
 package com.jss.expensifyappbackend.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -11,8 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="expense")
-public class Expense {
+public class Expense implements Serializable {
 	
+	private static final long serialVersionUID = 7795641355329585090L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")

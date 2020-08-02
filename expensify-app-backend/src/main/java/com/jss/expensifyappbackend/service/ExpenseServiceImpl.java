@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jss.expensifyappbackend.entity.ErrorMessages;
 import com.jss.expensifyappbackend.entity.Expense;
+import com.jss.expensifyappbackend.exceptions.ExpenseServiceException;
 import com.jss.expensifyappbackend.repository.ExpenseRepository;
 
 @Service
@@ -35,10 +37,15 @@ public class ExpenseServiceImpl implements ExpenseService {
 			exp.setNote(updatedExpense.getNote());
 			exp.setCreatedAt(updatedExpense.getCreatedAt());
 		}
+		else {
+			
+			throw new ExpenseServiceException(ErrorMessages.NO_RECORD_FOUND.getMessage());
+		}
 	}
 
 	@Transactional
 	@Override
+	
 	public void removeExpense(String expenseId) {
 		expenseRepo.deleteByExpenseId(expenseId);
 	}
